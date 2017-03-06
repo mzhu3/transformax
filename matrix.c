@@ -45,8 +45,12 @@ angle of rotation and X as the axis of rotation.
 ====================*/
 struct matrix * make_rotX(double theta) {
   struct matrix temp = new_matrix(4,4);
+  double rad = (M_PI/180) * theta; 
   temp = ident(temp);
-  
+  temp->m[1][1] = cos(rad);
+  temp->m[1][2] = -1*(sin(rad));
+  temp->m[2][1] = sin(rad);
+  temp->m[2][2] = cos(rad);
   return temp;
 }
 
