@@ -104,14 +104,31 @@ void parse_file ( char * filename,
       matrix_mult(scale,transform);
     }
     else if(!strcmp(line,"rotate")){
-      struct matrix *trans = new_matrix(4,4);
-      int a,b,c;
+      struct matrix *rot = new_matrix(4,4);
+      int a;
+      char *b;
       fgets(line,255,f);
-      a = atoi(strsep(&line," ")); 
-      b = atoi(strsep(&line," "));
-      c = atoi(strsep(&line," "));
-      trans = make_translate(a,b,c);
-      matrix_mult(scale,transform);
+      b = strsep(&line," "); 
+      a = atoi(strsep(&line," "));
+      if(!strcmp(b,"x")){
+	rot = make_rotX(a);
+	matrix_mult(rot,transform);
+      }
+      if(!strcmp(b,"y")){
+	rot = make_rotY(a);
+	matrix_mult(rot,transform);
+      }
+      if(!strcmp(b,"z")){
+	rot = make_rotZ(a);
+	matrix_mult(rot,transform);
+      }
     }
+    else if(!strcmp(line,"apply")){
+      matrix_mult(transform,edges);
+    }
+    else if(!strcmp(line,"display")){
+      
+      fgets(line,255,f);
+    }
+
   }
-  
