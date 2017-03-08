@@ -94,6 +94,24 @@ void parse_file ( char * filename,
       matrix_mult(scale,transform);
     }
     else if(!strcmp(line,"translate")){
-
-	    }
+      struct matrix *trans = new_matrix(4,4);
+      int a,b,c;
+      fgets(line,255,f);
+      a = atoi(strsep(&line," ")); 
+      b = atoi(strsep(&line," "));
+      c = atoi(strsep(&line," "));
+      trans = make_translate(a,b,c);
+      matrix_mult(scale,transform);
+    }
+    else if(!strcmp(line,"rotate")){
+      struct matrix *trans = new_matrix(4,4);
+      int a,b,c;
+      fgets(line,255,f);
+      a = atoi(strsep(&line," ")); 
+      b = atoi(strsep(&line," "));
+      c = atoi(strsep(&line," "));
+      trans = make_translate(a,b,c);
+      matrix_mult(scale,transform);
+    }
+  }
   
