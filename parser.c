@@ -69,6 +69,31 @@ void parse_file ( char * filename,
   while ( fgets(line, 255, f) != NULL ) {
     line[strlen(line)-1]='\0';
     printf(":%s:\n",line);
-  }
-}
+    if(!strcmp(line,"line")){
+      int a,b,c,d,e,f; 
+      fgets(line,255,f);   
+      a = atoi(strsep(&line," "));
+      b = atoi(strsep(&line," "));
+      c = atoi(strsep(&line," "));
+      d = atoi(strsep(&line," "));
+      e = atoi(strsep(&line," "));
+      f = atoi(strsep(&line," "));
+      add_edge(edge,a,b,c,d,e,f);
+    }
+    else if(!strcmp(line,"ident")){
+      ident(transform);
+    }
+    else if(!strcmp(line,"scale")){
+      struct matrix *scale = new_matrix(4,4);
+      int a,b,c;
+      fgets(line,255,f);
+      a = atoi(strsep(&line," ")); 
+      b = atoi(strsep(&line," "));
+      c = atoi(strsep(&line," "));
+      scale = make_scale(a,b,c);
+      matrix_mult(scale,transform);
+    }
+    else if(!strcmp(line,"translate")){
+
+	    }
   
